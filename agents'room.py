@@ -2,9 +2,7 @@
 from autogen import AssistantAgent
 from autogen import GroupChat
 import autogen
-boneapi = "sk-CSJZkNSq8XHJoRI0LgzNfhrQmSGAQ8QE9WZlnAyTqoln6yqR"
-boneurl = "https://open.api.gu28.top/v1"
-#
+
 gpt4_config = {"model": "gpt-4o-mini", "api_key": boneapi,"base_url":boneurl}
 
 
