@@ -24,6 +24,7 @@ shared_scratchpad = """[SCRATCHPAD] Format
 task_agent = AssistantAgent(
     name="task_agent",
     system_message=f"""Keep the other parts of shared_scratchpad unchanged, and only replace <the original writing prompt> with the prompt assigned to you. Do not modify any other sections of shared_scratchpad.
+                        keep the format of shared_scratchpad you received, only finish your part and return edited shared_scratchpad.
                     {shared_scratchpad}""",
     llm_config={"config_list": [{"model": "gpt-4o", "api_key": boneapi,"base_url":boneurl }]},
     human_input_mode="NEVER",
@@ -36,6 +37,8 @@ conflict_agent = AssistantAgent(
                     ⋆ What’s the protagonist’s main goal in this story?
                     ⋆ Why do they want it?
                     ⋆ What’s stopping them from achieving it?
+
+                    keep the format of shared_scratchpad you received, only finish your part and return edited shared_scratchpad.
                     {shared_scratchpad}""",
     llm_config={"config_list": [{"model": "gpt-4o", "api_key": boneapi,"base_url":boneurl }]},
     human_input_mode="NEVER",
@@ -53,6 +56,8 @@ character_agent = AssistantAgent(
                         ⋆ What are their motivations and internal characteristics? What are their flaws? What
                         are their values? What are they afraid of? How will they change and grow over the
                         course of this story?
+
+                        keep the format of shared_scratchpad you received, only finish your part and return edited shared_scratchpad.
                         {shared_scratchpad}
                     """,
     llm_config={"config_list": [{"model": "gpt-4o", "api_key": boneapi,"base_url":boneurl }]},
@@ -67,6 +72,8 @@ setting_agent = AssistantAgent(
                         someone’s backyard?
                         ⋆ When does the story take place? What decade is it set in? How much time elapses
                         over the course of the story?
+
+                        keep the format of shared_scratchpad you received, only finish your part and return edited shared_scratchpad.
                         {shared_scratchpad}""",
     llm_config={"config_list": [{"model": "gpt-4o", "api_key": boneapi,"base_url":boneurl }]},
     human_input_mode="NEVER",
@@ -75,7 +82,10 @@ setting_agent = AssistantAgent(
 plot_agent = AssistantAgent(
     name="plot_agent",
     system_message=f"""Given [Creative Writing Task],[Central Conflict],[Character Descriptions],[Setting], describe the key plot points in detailed bullet
-                        points. {shared_scratchpad}""",
+                        points. 
+                        
+                        keep the format of shared_scratchpad you received, only finish your part and return edited shared_scratchpad.
+                        {shared_scratchpad}""",
     llm_config={"config_list": [{"model": "gpt-4o", "api_key": boneapi,"base_url":boneurl }]},
     human_input_mode="NEVER",
 )
@@ -89,7 +99,9 @@ exposition_agent = AssistantAgent(
                     re-explain details or events that have already been described.
                     
                     Focus only on the <exposition> part of the story. Do not write about the following parts of the
-                    story. Do not end the story.
+                    story. Do not end the story
+                    
+                    keep the format of shared_scratchpad you received, only finish your part and return edited shared_scratchpad.
                     {shared_scratchpad}""",
     llm_config={"config_list": [{"model": "gpt-4o", "api_key": boneapi,"base_url":boneurl }]},
     human_input_mode="NEVER",
@@ -105,6 +117,8 @@ rising_action_agent = AssistantAgent(
                     
                     Focus only on the <rising action> part of the story. Do not write about the following parts of the
                     story. Do not end the story.
+
+                    keep the format of shared_scratchpad you received, only finish your part and return edited shared_scratchpad.
                     {shared_scratchpad}""",
     llm_config={"config_list": [{"model": "gpt-4o", "api_key": boneapi,"base_url":boneurl }]},
     human_input_mode="NEVER",
@@ -120,6 +134,8 @@ climax_agent = AssistantAgent(
                     
                     Focus only on the <climax agent> part of the story. Do not write about the following parts of the
                     story. Do not end the story.
+
+                    keep the format of shared_scratchpad you received, only finish your part and return edited shared_scratchpad.
                     {shared_scratchpad}""",
     llm_config={"config_list": [{"model": "gpt-4o", "api_key": boneapi,"base_url":boneurl }]},
     human_input_mode="NEVER",
@@ -135,6 +151,8 @@ falling_action_agent = AssistantAgent(
                     
                     Focus only on the <falling action> part of the story. Do not write about the following parts of the
                     story. Do not end the story.
+
+                    keep the format of shared_scratchpad you received, only finish your part and return edited shared_scratchpad.
                     {shared_scratchpad}""",
     llm_config={"config_list": [{"model": "gpt-4o", "api_key": boneapi,"base_url":boneurl }]},
     human_input_mode="NEVER",
@@ -147,7 +165,9 @@ resolution_agent = AssistantAgent(
                     Begin your portion of the story in a way that naturally flows from the previous ending.
                     Match the writing style, vocabulary, and overall mood of the existing text. Do not
                     re-explain details or events that have already been described.
-                    
+
+
+                    keep the format of shared_scratchpad you received, only finish your part and return edited shared_scratchpad.
                     {shared_scratchpad}""",
     llm_config={"config_list": [{"model": "gpt-4o", "api_key": boneapi,"base_url":boneurl }]},
     human_input_mode="NEVER",
@@ -197,7 +217,7 @@ user_proxy = autogen.UserProxyAgent(
 planning_group_chat = GroupChat(
     agents=[task_agent,conflict_agent, character_agent, setting_agent, plot_agent,exposition_agent,rising_action_agent,climax_agent,falling_action_agent,resolution_agent,finalizer_agent,synthetic_agent],
     messages=[],
-    max_round=15,
+    max_round=13,
     send_introductions=True,
 
 )
