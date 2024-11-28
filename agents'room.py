@@ -2,10 +2,12 @@
 from autogen import AssistantAgent
 from autogen import GroupChat
 import autogen
-
+boneapi = "sk-"
+boneurl = "https://open.api.gu28.top/v1"
 gpt4_config = {"model": "gpt-4o-mini", "api_key": boneapi,"base_url":boneurl}
 
-
+boneapi = "sk-"
+boneurl = "https://open.api.gu28.top/v1"
 
 conflict_agent = AssistantAgent(
     name="conflict_agent",
@@ -59,8 +61,68 @@ plot_agent = AssistantAgent(
 )
 
 #writing agents
-section_agent = AssistantAgent(
-    name="section_agent",
+exposition_agent = AssistantAgent(
+    name="exposition_agent",
+    system_message="""Given <identifiers found in the scratchpad>, continue the story by writing the <section>part.
+                    <If previous sections have been written, include the following in the prompt:>
+                    Begin your portion of the story in a way that naturally flows from the previous ending.
+                    Match the writing style, vocabulary, and overall mood of the existing text. Do not
+                    re-explain details or events that have already been described.
+                    <If this is not the meant to be the last section, include the following in the prompt:>
+                    Focus only on the <section> part of the story. Do not write about the following parts of the
+                    story. Do not end the story.
+                    <scratchpad>""",
+    llm_config={"config_list": [{"model": "gpt-4o-mini", "api_key": boneapi,"base_url":boneurl }]},
+    human_input_mode="NEVER",
+)
+
+rising_action_agent = AssistantAgent(
+    name="rising_action_agent",
+    system_message="""Given <identifiers found in the scratchpad>, continue the story by writing the <section>part.
+                    <If previous sections have been written, include the following in the prompt:>
+                    Begin your portion of the story in a way that naturally flows from the previous ending.
+                    Match the writing style, vocabulary, and overall mood of the existing text. Do not
+                    re-explain details or events that have already been described.
+                    <If this is not the meant to be the last section, include the following in the prompt:>
+                    Focus only on the <section> part of the story. Do not write about the following parts of the
+                    story. Do not end the story.
+                    <scratchpad>""",
+    llm_config={"config_list": [{"model": "gpt-4o-mini", "api_key": boneapi,"base_url":boneurl }]},
+    human_input_mode="NEVER",
+)
+
+climax_agent = AssistantAgent(
+    name="climax_agent",
+    system_message="""Given <identifiers found in the scratchpad>, continue the story by writing the <section>part.
+                    <If previous sections have been written, include the following in the prompt:>
+                    Begin your portion of the story in a way that naturally flows from the previous ending.
+                    Match the writing style, vocabulary, and overall mood of the existing text. Do not
+                    re-explain details or events that have already been described.
+                    <If this is not the meant to be the last section, include the following in the prompt:>
+                    Focus only on the <section> part of the story. Do not write about the following parts of the
+                    story. Do not end the story.
+                    <scratchpad>""",
+    llm_config={"config_list": [{"model": "gpt-4o-mini", "api_key": boneapi,"base_url":boneurl }]},
+    human_input_mode="NEVER",
+)
+
+falling_action_agent = AssistantAgent(
+    name="falling_action_agent",
+    system_message="""Given <identifiers found in the scratchpad>, continue the story by writing the <section>part.
+                    <If previous sections have been written, include the following in the prompt:>
+                    Begin your portion of the story in a way that naturally flows from the previous ending.
+                    Match the writing style, vocabulary, and overall mood of the existing text. Do not
+                    re-explain details or events that have already been described.
+                    <If this is not the meant to be the last section, include the following in the prompt:>
+                    Focus only on the <section> part of the story. Do not write about the following parts of the
+                    story. Do not end the story.
+                    <scratchpad>""",
+    llm_config={"config_list": [{"model": "gpt-4o-mini", "api_key": boneapi,"base_url":boneurl }]},
+    human_input_mode="NEVER",
+)
+
+resolution_agent = AssistantAgent(
+    name="resolution_agent",
     system_message="""Given <identifiers found in the scratchpad>, continue the story by writing the <section>part.
                     <If previous sections have been written, include the following in the prompt:>
                     Begin your portion of the story in a way that naturally flows from the previous ending.
