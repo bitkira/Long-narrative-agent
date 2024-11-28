@@ -2,8 +2,7 @@ import openai
 import json
 import os
 # 设置 OpenAI API 密钥
-client = openai.OpenAI(api_key="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",
-                       base_url="https://openrouter.ai/api/v1")
+client = openai.OpenAI
 
 # 读取 jsonl 文件中的数据
 def load_jsonl(file_path):
